@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "authservice.token.validity-seconds",
+      "type": "java.lang.String",
+      "description": "Description for authservice.token.validity-seconds."
+    },
+    {
+      "name": "authservice.token.signing-key",
+      "type": "java.lang.String",
+      "description": "Description for authservice.token.signing-key."
+    }
+  ] }
