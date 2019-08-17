@@ -36,7 +36,8 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
                 .body(
                         ApiErrorDto.builder()
                                 .message(apiError.getMessage())
-                                .status(apiError.getStatus().value()).build()
+                                .status(apiError.getStatus().value())
+                                .timestamp(LocalDateTime.now()).build()
                 );
     }
 }

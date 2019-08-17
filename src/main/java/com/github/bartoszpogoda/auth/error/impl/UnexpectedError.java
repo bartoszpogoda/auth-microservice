@@ -3,7 +3,7 @@ package com.github.bartoszpogoda.auth.error.impl;
 import com.github.bartoszpogoda.auth.error.AbstractApiError;
 import org.springframework.http.HttpStatus;
 
-public class RegistrationFailedError extends AbstractApiError {
+public class UnexpectedError extends AbstractApiError {
 
     @Override
     public HttpStatus getStatus() {

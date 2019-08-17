@@ -5,6 +5,7 @@ import com.github.bartoszpogoda.auth.entity.Permission;
 import com.github.bartoszpogoda.auth.entity.Role;
 import com.github.bartoszpogoda.auth.entity.User;
 import com.github.bartoszpogoda.auth.repository.UserRepository;
+import com.google.common.collect.Lists;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Profile;
@@ -31,28 +32,20 @@ public class DataSeed implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
+        User adminUser = User.builder()
+                .email("admin@admin.com")
+                .encodedPassword(this.passwordEncoder.encode("admin123"))
+                .roles(RolesSeedHelper.boxedInSet(RolesSeedHelper.adminRole()))
+                .build();
 
-        User user = User.builder()
+        User testUser = User.builder()
                 .email("adam.kowalski@onet.pl")
                 .encodedPassword(this.passwordEncoder.encode("pass123"))
-                .build();
-        Activity activity = Activity.builder().method("GET").urlPattern("/test").name("getTest").build();
-        Permission permission = Permission.builder()
-                .name("testPermission")
-                .activities(Collections.singletonList(activity))
+                .roles(RolesSeedHelper.boxedInSet(RolesSeedHelper.testRole()))
                 .build();
 
-        Role role = Role.builder().name("ROLE_USER").permissions(Collections.singletonList(permission)).build();
-
-        Set<Role> roleSet = new HashSet<>();
-        roleSet.add(role);
-
-        user.setRoles(roleSet);
-
-        User savedUser = this.userRepository.save(user);
-
-        log.info(savedUser.toString());
+        this.userRepository.save(adminUser);
+        this.userRepository.save(testUser);
     }
-
 
 }

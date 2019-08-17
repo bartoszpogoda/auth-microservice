@@ -31,6 +31,8 @@ public class UserService {
         this.defaultUserRole = defaultUserRole;
     }
 
+    public Optional<User> findById(long id) { return this.userRepository.findById(id); }
+
     public Optional<User> findByEmail(String email) {
         return this.userRepository.findByEmail(email);
     }

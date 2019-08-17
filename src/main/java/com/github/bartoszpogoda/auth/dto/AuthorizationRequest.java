@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 public class AuthorizationRequest {
-    private String userId;
-    private String URL;
+    private long userId;
+    private String url;
     private String method;
 }
