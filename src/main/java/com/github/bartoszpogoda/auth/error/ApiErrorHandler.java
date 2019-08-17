@@ -1,8 +1,11 @@
 package com.github.bartoszpogoda.auth.error;
 
+import com.github.bartoszpogoda.auth.error.dto.ApiErrorDto;
+import com.github.bartoszpogoda.auth.error.dto.ValidationApiSubErrorDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -21,12 +24,24 @@ public class ApiErrorHandler extends ResponseEntityExceptionHandler {
                                                                   HttpStatus status,
                                                                   WebRequest request) {
 
-        return ResponseEntity.badRequest().body(
-                ApiErrorDto.builder()
-                    .message("Validation failed")
-                    .details(ex.getBindingResult().toString())
-                    .timestamp(LocalDateTime.now()).build()
-        );
+        ApiErrorDto apiErrorDto = ApiErrorDto.builder()
+                .status(status.value())
+                .message("Validation failed")
+                .timestamp(LocalDateTime.now()).build();
+
+        ex.getBindingResult().getFieldErrors().stream()
+                .map(this::mapToValidationApiSubErrorDto)
+                .forEach(apiErrorDto::addSubError);
+
+        return ResponseEntity.badRequest().body(apiErrorDto);
+    }
+
+    private ValidationApiSubErrorDto mapToValidationApiSubErrorDto(FieldError fieldError) {
+        return ValidationApiSubErrorDto.builder()
+                .field(fieldError.getField())
+                .message(fieldError.getDefaultMessage())
+                .rejectedValue(fieldError.getRejectedValue())
+                .build();
     }
 
     @ExceptionHandler(AbstractApiError.class)

@@ -1,20 +1,13 @@
 package com.github.bartoszpogoda.auth.demo;
 
-import com.github.bartoszpogoda.auth.entity.Activity;
-import com.github.bartoszpogoda.auth.entity.Permission;
-import com.github.bartoszpogoda.auth.entity.Role;
 import com.github.bartoszpogoda.auth.entity.User;
 import com.github.bartoszpogoda.auth.repository.UserRepository;
-import com.google.common.collect.Lists;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 @Profile("seed")
 @Component
