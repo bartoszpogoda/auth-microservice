@@ -1,7 +1,7 @@
 package com.github.bartoszpogoda.auth.demo;
 
 import com.github.bartoszpogoda.auth.entity.User;
-import com.github.bartoszpogoda.auth.repository.UserRepository;
+import com.github.bartoszpogoda.auth.rest.UserRestRepository;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Profile;
@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 @Log
 public class DataSeed implements InitializingBean {
 
-    private final UserRepository userRepository;
+    private final UserRestRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
 
-    public DataSeed(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public DataSeed(UserRestRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }

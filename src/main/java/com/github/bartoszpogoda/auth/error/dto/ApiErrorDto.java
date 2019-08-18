@@ -20,6 +20,7 @@ public class ApiErrorDto {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private String debugMessage;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<ApiSubErrorDto> subErrors;
 
     public void addSubError(ApiSubErrorDto subError) {

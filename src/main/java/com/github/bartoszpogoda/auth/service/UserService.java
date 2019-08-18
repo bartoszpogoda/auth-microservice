@@ -3,7 +3,7 @@ package com.github.bartoszpogoda.auth.service;
 import com.github.bartoszpogoda.auth.entity.Role;
 import com.github.bartoszpogoda.auth.entity.User;
 import com.github.bartoszpogoda.auth.error.impl.DefaultRoleForUserDoesntExistError;
-import com.github.bartoszpogoda.auth.repository.UserRepository;
+import com.github.bartoszpogoda.auth.rest.UserRestRepository;
 import com.github.bartoszpogoda.auth.dto.RegistrationRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,13 +15,13 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final UserRestRepository userRepository;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
 
     private String defaultUserRole;
 
-    public UserService(UserRepository userRepository,
+    public UserService(UserRestRepository userRepository,
                        RoleService roleService,
                        PasswordEncoder passwordEncoder,
                        @Value("${auth.defaultUserRole}") String defaultUserRole) {

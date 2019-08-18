@@ -14,4 +14,4 @@ auth:
       key:
         roles: roles
         id: id
-  defaultUserRole: ROLE_USER
+  defaultUserRole: ROLE_TEST

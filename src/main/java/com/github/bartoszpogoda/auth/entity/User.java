@@ -1,6 +1,9 @@
 package com.github.bartoszpogoda.auth.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 
 import java.util.Set;
@@ -23,6 +26,7 @@ public class User {
     @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Role> roles;
 
+    @JsonIgnore
     private String encodedPassword;
 
 }
